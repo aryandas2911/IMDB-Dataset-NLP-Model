@@ -1,35 +1,37 @@
-# IMDB Sentiment Analysis using NLP
+# IMDB Sentiment Analysis using NLP & Deep Learning
 
-A notebook-based Natural Language Processing (NLP) project that performs sentiment analysis on the IMDB movie reviews dataset. The project focuses on comparing different text vectorization techniques and understanding how they affect classification performance.
+A comprehensive Natural Language Processing (NLP) project that performs sentiment analysis on the IMDB movie reviews dataset. This project explores both **classical machine learning approaches** and **deep learning (LSTM-based models)** to understand how different text representations impact performance.
 
 ---
 
 ## 📌 Project Overview
 
-Sentiment analysis is a core NLP task where the goal is to determine whether a piece of text expresses a positive or negative opinion. In this project, various text representation techniques are applied to IMDB movie reviews and evaluated using a classical machine learning classifier.
+Sentiment analysis is a fundamental NLP task focused on determining whether a piece of text expresses a **positive or negative opinion**.
 
-Rather than building an end-to-end application, this project emphasizes **conceptual clarity, experimentation, and interpretation of results**, making it ideal as a first NLP project.
+This project goes beyond basic implementation and focuses on:
+
+- Comparing **traditional vectorization techniques** with **neural network-based embeddings**
+- Understanding the trade-offs between **interpretability, performance, and complexity**
+- Building intuition about when to use classical ML vs deep learning
 
 ---
 
 ## 🧠 Objectives
 
-- Perform thorough text preprocessing on raw movie reviews  
-- Experiment with multiple text vectorization techniques  
-- Compare model performance under identical conditions  
-- Understand when and why certain representations work better  
-- Draw meaningful conclusions from experimental results  
+- Perform robust text preprocessing on raw movie reviews
+- Experiment with multiple text vectorization techniques
+- Compare classical ML models with deep learning models
+- Understand strengths and limitations of each approach
+- Analyze how sequence modeling improves sentiment understanding
 
 ---
 
 ## 📂 Dataset
 
-- **Dataset:** IMDB Movie Reviews
-- **Link:** https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews
+- **Dataset:** IMDB Movie Reviews  
+- **Link:** https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews  
 - **Classes:** Positive / Negative  
-- **Task:** Binary sentiment classification  
-
-Each review is labeled based on the sentiment expressed by the reviewer.
+- **Task:** Binary Sentiment Classification  
 
 ---
 
@@ -38,73 +40,133 @@ Each review is labeled based on the sentiment expressed by the reviewer.
 - **Language:** Python  
 - **Environment:** Jupyter Notebook  
 
-**Libraries Used:**
+### Libraries Used
+
+#### Classical NLP:
 - NumPy  
 - Pandas  
 - Scikit-learn  
 - Gensim  
-- NLTK / Regex (for preprocessing)
+- NLTK / Regex  
+
+#### Deep Learning:
+- TensorFlow / Keras  
 
 ---
 
 ## 🔄 Project Workflow
 
-The project follows a structured NLP pipeline:
+### 1. Text Preprocessing
 
-1. **Text Preprocessing**
-   - Lowercasing
-   - Removing HTML tags
-   - Removing special characters and numbers
-   - Normalizing extra whitespace
+- Lowercasing  
+- Removing HTML tags  
+- Removing special characters and numbers  
+- Normalizing whitespace  
 
-2. **Train–Test Split**
-   - Single split applied consistently across all experiments
+---
 
-3. **Text Vectorization**
-   - One-Hot Encoding (OHE)
-   - Bag of Words (BoW)
-   - TF-IDF (unigrams)
-   - TF-IDF (unigrams + bigrams)
-   - Word2Vec (averaged word embeddings)
+### 2. Train–Test Split
 
-4. **Model Training**
-   - Logistic Regression used as a baseline classifier
+- Consistent split across all experiments  
 
-5. **Evaluation**
-   - Accuracy
-   - Classification report
+---
+
+### 3. Feature Engineering / Representation
+
+#### 🔹 Classical NLP Techniques
+
+- One-Hot Encoding (OHE)  
+- Bag of Words (BoW)  
+- TF-IDF (unigrams)  
+- TF-IDF (unigrams + bigrams)  
+- Word2Vec (averaged embeddings)  
+
+#### 🔹 Deep Learning Representation
+
+- Tokenization (Top 5000 words)  
+- Sequence Padding (fixed length = 200)  
+- Learned Embeddings via Keras Embedding Layer  
+
+---
+
+### 4. Model Training
+
+#### Classical Model
+
+- Logistic Regression (baseline)  
+
+#### Deep Learning Model
+
+- Embedding Layer  
+- LSTM (Long Short-Term Memory)  
+- Dense Output Layer (Sigmoid)  
+
+---
+
+### 5. Evaluation Metrics
+
+- Accuracy  
+- Classification Report  
 
 ---
 
 ## 📊 Experimental Results
 
-| Vectorization Method        | Accuracy |
-|-----------------------------|----------|
-| One-Hot Encoding (OHE)      | 0.8745   |
-| Bag of Words (1–2 grams)    | 0.8732   |
-| TF-IDF (unigrams)           | 0.8883   |
-| **TF-IDF (1–2 grams)**      | **0.8920** |
-| Word2Vec (Averaged Vectors) | 0.8483   |
+### 🔹 Classical NLP Results
+
+| Vectorization Method     | Accuracy |
+|--------------------------|----------|
+| One-Hot Encoding (OHE)   | 0.8745   |
+| Bag of Words (1–2 grams) | 0.8732   |
+| TF-IDF (unigrams)        | 0.8883   |
+| **TF-IDF (1–2 grams)**   | **0.8920** |
+| Word2Vec (Averaged)      | 0.8483   |
+
+---
+
+### 🔹 Deep Learning (LSTM)
+
+| Model            | Accuracy |
+|------------------|----------|
+| LSTM + Embedding | 0.8910   |
 
 ---
 
 ## 🔍 Key Observations
 
-- TF-IDF outperformed frequency-based methods by emphasizing sentiment-bearing words.
-- Incorporating bigrams improved performance by capturing contextual patterns such as negation.
-- Word2Vec embeddings, while semantically rich, underperformed due to loss of word order and negation when using simple averaging.
-- More complex representations do not necessarily yield better results without appropriate modeling techniques.
+### Classical NLP
+
+- TF-IDF outperformed frequency-based methods by emphasizing **important words**
+- Bigrams improved results by capturing **context and negation**
+- Word2Vec underperformed due to **loss of word order when averaged**
+
+### Deep Learning (LSTM)
+
+- LSTM captures **sequential dependencies and context**
+- Handles phrases like:
+  > "not good" vs "good"
+- Learns **word representations automatically** (no manual feature engineering)
+
+---
+
+## ⚖️ Classical NLP vs Deep Learning
+
+| Aspect           | Classical NLP   | LSTM (Deep Learning) |
+|------------------|-----------------|----------------------|
+| Interpretability | High            | Low                  |
+| Feature Control  | Manual          | Automatic            |
+| Context Handling | Limited         | Strong               |
+| Training Time    | Fast            | Slower               |
+| Performance      | Strong baseline | Better with tuning   |
 
 ---
 
 ## ✅ Conclusion
 
-This project demonstrates that the choice of text representation plays a crucial role in NLP pipelines. For sentiment analysis tasks that rely heavily on specific keywords and short contextual patterns, TF-IDF with n-grams can outperform semantic embeddings like Word2Vec.
+This project shows that:
 
-The project highlights the importance of aligning model complexity with task requirements rather than assuming that more advanced techniques will always lead to better performance.
+- **TF-IDF + Logistic Regression** is a strong and reliable baseline  
+- **Deep learning models (LSTM)** bring contextual understanding but require more tuning  
+- More complex models don’t guarantee better performance unless used correctly  
 
-## 📎 Notes
-
-This project is intended for learning and academic purposes and focuses on building a strong conceptual foundation in NLP rather than production deployment.
-
----
+> **The best model is not the most complex one — it’s the one aligned with the problem.**
